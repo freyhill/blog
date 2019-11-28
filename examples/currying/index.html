@@ -1,0 +1,55 @@
+<!--
+ * @FileName: curryinng
+ * @Author: Leinov
+ * @Date: 2019-11-28 10:10:47
+ * @LastEditTime: 2019-11-28 13:13:34
+ * @Description: description your file
+ * @FilePath: \Blog\examples\currying\index.html
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>currying</title>
+    <link rel="stylesheet" href="./style.css">
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id='app' class='flex'>
+        <div class='currying flex'>
+                <div class='list'>
+                    <template v-for='item in list'>
+                            <div class='item'   v-bind:style="{ backgroundColor: item.theme}">{{item.id}}</div>
+                    </template>
+                </div>
+                <div class='view flex1'>
+                    该主题背景被使用至{{num1}}个页面
+                </div>
+                <div class='theme'>
+                    <template v-for='item in theme'>
+                            <div class='item' v-on:click="usedNum(item,1)" v-bind:style="{ backgroundColor: item}"></div>
+                    </template>
+                </div>
+        </div>
+        <div class='nocurrying flex'>
+                <div class='list'>
+                    <template v-for='item in list'>
+                            <div class='item' v-bind:style="{ backgroundColor: item.theme}">{{item.id}}</div>
+                    </template>
+                </div>
+                <div class='view flex1'>
+                    该主题背景被使用至{{num2}}个页面
+                </div>
+                <div class='theme'>
+                    <template v-for='item in theme'>
+                            <div class='item' v-on:click="usedNum(item,2)" v-bind:style="{ backgroundColor: item}"></div>
+                    </template>
+                </div>
+        </div>
+       
+    </div>
+    <script src="./app.js"></script>
+</body>
+</html>

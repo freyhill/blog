@@ -1,13 +1,12 @@
-// function throttle (fn, delay = 300) {
-//     let prev = Date.now();
-//     console.log(prev);
-//     return (...args) => {
-//       let now = Date.now();
-//       if (now - prev >= delay) {
-//         fn.call(this, ...args);
-//       }
-//     };
-//   }
+/*
+ * @FileName: 节流
+ * @Author: Leinov
+ * @Date: 2019-11-28 10:06:42
+ * @LastEditTime: 2019-11-28 10:07:20
+ * @Description: 节流
+ * @FilePath: \Blog\examples\throttle\index.js
+ */
+
 function throttle(fn, interval = 300) {
     let canRun = true;
     return function (...args) {
