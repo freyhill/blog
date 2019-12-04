@@ -2,10 +2,11 @@
  * @FileName: My file
  * @Author: Leinov
  * @Date: 2019-07-29 21:06:32
- * @LastEditTime: 2019-12-04 18:58:06
+ * @LastEditTime: 2019-12-04 19:03:16
  * @Description: description your file
  * @FilePath: \Blog\README.md
  -->
+# TODO
 
 ## 程序人生
 * 如果不再写代码我还能做些什么
@@ -13,10 +14,12 @@
 ## 高效开发
 * [机械键盘清洁实录](https://github.com/leinov/Blog/issues/1)
 * [@vue/cli创建typescript项目](https://github.com/leinov/Blog/issues/2)
-* [npm，nvm，nrm区别及常用命令](https://github.com/leinov/Blog/issues/3)
+* [npm、nvm、nrm常用命令](https://github.com/leinov/Blog/issues/3)
+* 必须数量掌握的20个git命令
 * gitLab部署
-* docker部署微服务
+* docker部署微服务实战
 * 解放双手-jenkins自动部署
+
 ## JavaScript高级
 * defineProperty
 * this
