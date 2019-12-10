@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="HTML,Javascript,前端开发,javascript高级, 柯里化">
     <title>JavaScript函数柯里化最佳实践 | Currying</title>
     <link rel="stylesheet" href="./assert/style.css">
     <link rel="stylesheet" href="./assert/atom-one-dark-reasonable.css">
@@ -19,7 +20,7 @@
     <script type="text/javascript" src="https://unpkg.com/vue"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </head>
-    <div class='header'>柯里化最佳实践</div>
+    <div class='header'><span class='title'> 柯里化最佳实践</span> <a class='github' target='_blank' href='https://github.com/leinov/Blog/tree/master/examples/currying'>Github</a></div>
     <div id='app' class='flex'>
         <template v-for='item in [1]'>
             <div class='currying flex'>
@@ -62,6 +63,7 @@
                     </div>
                 </div>
                 <div class='theme'>
+                    <span>主题背景</span>
                     <template v-for='themeitem in theme'>
                             <div class='item' v-on:click="usedNum(themeitem, item)" v-bind:style="{ backgroundColor: themeitem}"></div>
                     </template>
