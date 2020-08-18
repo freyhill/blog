@@ -1,0 +1,27 @@
+{
+  "name": "Blog",
+  "version": "1.0.0",
+  "description": "<!--  * @FileName: My file  * @Author: Leinov  * @Date: 2019-07-29 21:06:32  * @LastEditTime: 2019-12-04 19:11:32  * @Description: description your file  * @FilePath: \\Blog\\README.md  -->",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leinov/Blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leinov/Blog/issues"
+  },
+  "homepage": "https://github.com/leinov/Blog#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
