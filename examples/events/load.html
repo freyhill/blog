@@ -14,7 +14,6 @@
         <label>Event log:</label>
         <textarea readonly class="event-log-contents" rows="8" cols="30"></textarea>
       </div>
-      <img src="pic.webp"/>
       
       <script>
        const log = document.querySelector('.event-log-contents');
@@ -28,7 +27,7 @@
         });
         // 整个页面资源加载完成 包括图片 等同于 document.readyState === complete
         window.addEventListener('load', (event) => {
-            log.textContent = log.textContent + 'load\n';
+            log.textContent = log.textContent + 'loaded\n';
         });
         // 监听document.readyState的变化 值为interactive 和 complete 等同于 DOMContentLoaded 和 load
         document.addEventListener('readystatechange', (event) => {
