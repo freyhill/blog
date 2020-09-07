@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片懒加载</title>
+    
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        body{
+            padding: 20px;
+            text-align: justify;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+    <img src="http://i1.go2yd.com/image/0QdEKBqRJa?net=wifi&type=webp_345x207" onload="~function(){console.log(1)}()"/>
+        <div id="img-list">
+            
+        </div>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/zepto/0.0.1/zepto.min.js"></script>  
+    <script src="static/js/img-lazy-load.js"></script>
+    <script>
+        // 图片模拟数据
+        const imagesList = [
+            {
+                width: 343,
+                height: 429,
+                url: 'https://pic3.zhimg.com/v2-f8578f963ed7c0f555abd9ad50563a03_b.jpg'
+            },
+            {
+                width: 343,
+                height: 429,
+                url: 'https://pic4.zhimg.com/v2-321922bcbecf161af8a7622808d436dc_r.jpg'
+            },
+            {
+                width: 343,
+                height: 429,  
+                url: 'https://pic1.zhimg.com/80/v2-409720114bc2fe530617c1a5c8744a75_720w.jpg'
+            },{
+                width: 343,
+                height: 429,
+                url:'https://pic2.zhimg.com/80/v2-6761d97aba5df0b28ea82c90e35323f8_720w.jpg'
+            },
+            {
+                width: 343,
+                height: 429,
+                url:'https://pic2.zhimg.com/80/v2-3f5f4bb9e79db8bd94d3506e2e80290f_720w.jpg'
+            },
+            {
+                width: 343,
+                height: 429,
+                url:'https://pic4.zhimg.com/80/v2-dd404c3bc9841d742228a853c148fa3c_720w.jpg'
+                }
+            ];
+             
+        lazyLoadImg('#img-list', imagesList)   
+       
+
+    </script>
+</body>
+</html>
