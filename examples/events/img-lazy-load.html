@@ -18,13 +18,17 @@
             width: 100%;
             height: 100%;
         }
+        .load-error{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #666;
+        }
     </style>
 </head>
 <body>
     <div id="root">
-    <img src="http://i1.go2yd.com/image/0QdEKBqRJa?net=wifi&type=webp_345x207" onload="~function(){console.log(1)}()"/>
         <div id="img-list">
-            
         </div>
     </div>
     <script src="https://cdn.bootcdn.net/ajax/libs/zepto/0.0.1/zepto.min.js"></script>  
@@ -62,10 +66,7 @@
                 url:'https://pic4.zhimg.com/80/v2-dd404c3bc9841d742228a853c148fa3c_720w.jpg'
                 }
             ];
-             
         lazyLoadImg('#img-list', imagesList)   
-       
-
     </script>
 </body>
 </html>

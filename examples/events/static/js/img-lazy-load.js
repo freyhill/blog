@@ -2,8 +2,8 @@
 !function(){
     window.imgLoadMap = (function() {
         const mapList = {}
-        return function(src) {
-            if (mapList[src]) {
+        return function(src, time) {
+            if (mapList[src] && !time) {
                 mapList[src] = (+ new Date()) - mapList[src]
             } else {
                 mapList[src] = + new Date();
@@ -14,54 +14,109 @@
             console.log(mapList, averageTime + 'ms');
         }
     })();
+    
+    /**
+     * 构造函数
+     * 
+     * @param {String} ele 
+     * @param {Array} imgList 
+     */
     function LazyLoad(ele, imgList) {
         this.ele = ele;
-        this.imgInit(ele, imgList);
-        this.lazy((src) =>{
-            imgLoadMap(src);
-        });
+        this.imgList = imgList;
+        this.imgInitRender(ele, imgList);
+        this.lazyLoad();
     }
-
-    LazyLoad.prototype.imgInit = function(ele, imgList) {
+    /**
+     * 图片渲染初始化
+     * 
+     * @param {String} ele 
+     * @param {Array} imgList 
+     */
+    LazyLoad.prototype.imgInitRender = function(ele, imgList) {
         const winW = window.innerWidth;
         let imgHTML = imgList.map((item) => {
             const wrapperWidth = (winW- 40);
             const wrapperHeight = wrapperWidth / item.width * item.height;
             return `
-                <div>最近，我参加了一个朋友组织的聚会，其中一个朋友的朋友是暖场王，以诙谐的语言和人生的阅历迅速晋级为全场TOP 1的主场嘉宾，这样的黄金单身汉如果放在相亲市场应该很抢手吧，主要的是他很懂车，名下包括但不限于奔驰AMG GT、牧马人等车型，听说我是一名汽车编辑，还是个女的，便神采奕奕地问我，你最近在关注什么车？</div>
+                <div>大江东去，浪淘尽，千古风流人物。故垒西边，人道是，三国周郎赤壁。乱石穿空，惊涛拍岸，卷起千堆雪。江山如画，一时多少豪杰。遥想公瑾当年，小乔初嫁了，雄姿英发。羽扇纶巾，谈笑间，樯橹灰飞烟灭。故国神游，多情应笑我，早生华发。人生如梦，一樽还酹江月。</div>
                 <div data-src=${item.url} 
                      class="img-wrapper" 
                      style="width:${wrapperWidth}px; height: ${wrapperHeight}px; background:#f1f1f1">
                 </div>
-                <div>“卫士的空气悬架可以降低方便进入，也可以升高提升通过性，最大的升降行程是185mm，接近角38°，大G 31°，牧马人35°，后面的离去角是40°，大G和牧马人都只有29°；大G和牧马人的离地间隙分别是241mm和251mm，卫士291mm，有30mm的最大离地间隙，我想你知道这些数据都意味着什么。”从这场对话的开端，我都是不卑不亢的态度，一连串的数字对比下来，朋友的朋友反而有些窘迫了。
+                <div>明月几时有？把酒问青天。不知天上宫阙，今夕是何年。我欲乘风归去，又恐琼楼玉宇，高处不胜寒。起舞弄清影，何似在人间。
                 </div>
             `
         })
         $(ele).html(imgHTML.join(''));
     }
-    
-    LazyLoad.prototype.lazy = function(callback) {
+    /**
+     * 单个图片渲染
+     * 
+     * @param {Object} self 
+     * @param {String} imgSrc 
+     */
+    LazyLoad.prototype.domAdd = function(self, imgSrc) {
+        const imgDom = `
+            <img 
+                style="opacity:0; transition:0.7s"
+                src=${imgSrc} 
+                onload='imgLoaded("${imgSrc}")'
+                onerror='imgLoadError("${imgSrc}")'
+            />  
+        `;
+        self.html(imgDom);
+        self.attr('data-loaded', '1');
+    }
+    /**
+     * 延迟加载主方法
+     */
+    LazyLoad.prototype.lazyLoad = function() {
         const winH = window.innerHeight;
+        const current = this;
         $(this.ele).find('.img-wrapper').each(function (item, p) {
             const self = $(this);
             const imgSrc = self.attr('data-src');
             const divTop = this.getBoundingClientRect().top;
-           if ((divTop - winH ) < winH && !self.attr('data-loaded')) {
-                const imgDom = `
-                    <img src=${imgSrc} onload='(${[callback]})("${imgSrc}")' />  
-                `
-                self.html(imgDom);
-                callback(imgSrc);
-                self.attr('data-loaded', '1');
-           }
+            if ((divTop - winH ) < winH && !self.attr('data-loaded')) {
+                current.domAdd(self, imgSrc);
+            }
         })
     }
+    /**
+     * 对外方法
+     * 
+     * @param {String} ele 
+     * @param {Array} imgList 
+     */
     window.lazyLoadImg = function (ele, imgList) {
         const load = new LazyLoad(ele, imgList);
+        // 图片加载失败处理
+        window.imgLoadError = function(src) {
+            $(load.ele).find(".img-wrapper").map((index,item) => {
+               if ($(item).attr('data-src') === src) {
+                   $(item).attr('data-loaded', 0).addClass('load-error');
+                   $(item).html(`加载失败，请点击重试！`);
+               }
+            });
+            $(".load-error").unbind("click").bind("click", function(){
+                console.log('-------');
+                load.domAdd($(this), $(this).attr("data-src"));
+                $(this).removeClass("load-error");
+            });
+        }
+        
+        // 图片加载完成回调
+        window.imgLoaded = function(src) {
+            $(load.ele).find("img").map((index, item) => {
+                if ($(item).attr('src') === src) {
+                  $(item).css("opacity", 1).parent().attr("data-loaded", 1).removeClass("load-error");
+                }
+            })
+        }
+        // 滚动监听
         window.addEventListener('scroll', function(){
-            load.lazy((src) => {
-                imgLoadMap(src)
-            });  
+            load.lazyLoad(); 
         });  
     }
 }();
