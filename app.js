@@ -1,10 +1,20 @@
-const express = require('express');
+process.env.NODE_ENV = 'development';
 
-const app = express();
-const port = 9111;
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const config = require('./webpack.config');
+const port = process.env.PORT || 9112;
 
-app.use(express.static(__dirname + '/examples'));
-
-app.listen(port, (err, res) => {
-    console.log(`listening port ${port}!`);
+new WebpackDevServer(webpack(config), {
+  publicPath: config.output.publicPath,
+  hot: true,
+  stats: {
+    chunkModules: false,
+    colors: true,
+  }
+}).listen(port, 'localhost', function (err) {
+  if (err) {
+    console.log(err);
+  }
+  console.log('Listening at http://localhost/' + port);
 });
