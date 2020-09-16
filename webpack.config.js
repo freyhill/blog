@@ -1,7 +1,6 @@
 'use strict';
 const path  = require('path');
 module.exports = {
-  mode: "development",
   devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : '',
   entry: {
     'slide-card': path.join(__dirname, './react-demos/slide-card/index.jsx'),
