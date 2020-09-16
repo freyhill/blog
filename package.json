@@ -7,7 +7,9 @@
     "example": "examples"
   },
   "scripts": {
-    "start": "node app.js",
+    "dev": "NODE_ENV=development node app.js",
+    "start": "NODE_ENV=production node app",
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,25 +24,26 @@
   },
   "homepage": "https://github.com/leinov/Blog#readme",
   "dependencies": {
-    "@babel/plugin-transform-regenerator": "^7.10.4",
-    "@babel/plugin-transform-runtime": "^7.11.5",
     "axios": "^0.20.0",
     "express": "^4.17.1",
     "lodash": "^4.17.20",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "sass": "^1.26.10"
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
+    "@babel/plugin-transform-regenerator": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "sass": "^1.26.10",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.3.0",
     "sass-loader": "^10.0.2",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   }
 }
