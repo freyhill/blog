@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>晃动</title>
+    <style type="text/css">
+    @keyframes waggle{
+
+		0%{
+			transform: rotate(20deg);
+		}
+		40%{
+			transform: rotate(0deg);
+		}
+		80%{
+			transform: rotate(-20deg);
+		} 
+		
+		100%{
+			transform: rotate(0deg);
+		} 
+	}
+	.shake{
+		
+		animation:waggle .15s infinite;
+	}
+	#image{
+		width: 80px;
+	}
+	</style>
+</head>
+<body>
+    <button id="button">停止晃动</button>
+	<img id="image" class="shake" src="statics/images/crown.png"/>
+	
+</body>
+ <script>
+     document.getElementById('button').addEventListener('click', function(){
+		let image = document.getElementById('image');
+		if (image.hasAttribute('class')) {
+			image.removeAttribute("class")
+		} else {
+			image.setAttribute('class', 'shake')
+		}
+        
+     })
+     
+ </script>
+</html>

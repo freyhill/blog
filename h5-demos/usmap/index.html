@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USA Map</title>
+</head>
+<script src="https://lib.baomitu.com/echarts/5.0.0-beta.1/echarts.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+<body>
+<div id="USAMap" style="width: 1080px;height:600px;"></div>
+</body>
+
+<script>
+    // 美国地图
+    USAMap();
+    function USAMap() {
+        var myChart = echarts.init(document.getElementById("USAMap"));
+        // 开启加载loading的动画
+        myChart.showLoading();
+        axios.get('https://cdn.jsdelivr.net/gh/apache/incubator-echarts-website@asf-site/examples/data/asset/geo/USA.json').then(res => {
+            //console.log(res);
+            return res.data;
+        }).then((usaJson) => {
+            axios.get('./data.json').then(res => {
+                let colorData = res.data.data.detail_data;
+                colorData = colorData.map(item => {
+                    item.name = item.name1;
+                    const status = item.status === 1 ? 0 : (item.voteRate[0] > item.voteRate[2] ? 1 : 2);
+                    item.value = status;
+                    return item;
+                });
+                console.log(colorData);
+                myChart.hideLoading();
+                echarts.registerMap('USA', usaJson, {
+                    // 把阿拉斯加移到美国主大陆左下方
+                    Alaska: {
+                        left: -131,
+                        top: 25,
+                        width: 15
+                    },
+                    // 夏威夷
+                    Hawaii: {
+                        left: -110,
+                        top: 28,
+                        width: 5
+                    },
+                    // 波多黎各（因为名字有空格，所以写为字符串的形式）
+                    'Puerto Rico': {
+                        left: -76,
+                        top: 26,
+                        width: 2
+                    }
+                });
+                option = {
+                    title: {
+                        text: 'USA Population Estimates (2012)',
+                        subtext: 'Data from www.census.gov',
+                        sublink: 'http://www.census.gov/popest/data/datasets.html',
+                        left: 'right'
+                    },
+                    // 提示框组件
+                    tooltip: {
+                        trigger: 'item',
+                        // 浮层显示的延迟
+                        showDelay: 0,
+                        // 提示框浮层的移动动画过渡时间
+                        transitionDuration: 0.2,
+                        // 按要求的格式显示提示框
+                        formatter: function (params) {
+                            return `
+                                <table>
+                                    <tr>
+                                        <td>州数据：</td><td></td>
+                                        <td></td><td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>${params.data.name2}</td><td></td>
+                                        <td>选举人票:</td><td>${params.data.vote_number}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>拜登：${params.data.voteRate[0]}%</td><td></td>
+                                        <td>特朗普:</td><td>${params.data.voteRate[2]}%</td>
+                                    </tr>
+                                </table>
+                            `
+                        }
+                    },
+                    // 可视映射
+                    visualMap: {
+                        left: 'right',
+                        min: 0,
+                        max: 2,
+                        // 颜色区间
+                        inRange: {
+                            color: ['#cfe1ff', '#0f69ff', '#eb0f29']
+                        },
+                        // 文本，默认为数值文本
+                        text: ['High', 'Low'],
+                        // 显示拖拽用的手柄
+                        calculable: true
+                    },
+                    // 工具盒
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        left: 'left',
+                        top: 'top',
+                        feature: {
+                            // 数据视图
+                            dataView: {readOnly: false},
+                            // 还原
+                            restore: {},
+                            // 保存为图片
+                            saveAsImage: {}
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'USA PopEstimates',
+                            type: 'map',
+                            // 开启鼠标缩放和平移漫游
+                            roam: true,
+                            map: 'USA',
+                            // 显示标签
+                            emphasis: {
+                                label: {
+                                    show: true
+                                }
+                            },
+                            // 文本位置修正
+                            textFixed: {
+                                Alaska: [20, -20]
+                            },
+                            data: colorData
+                        }
+                    ]
+                };
+                myChart.setOption(option);
+            })
+        })
+    }
+
+
+</script>
+
+</html>

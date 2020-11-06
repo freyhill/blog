@@ -4,6 +4,7 @@ module.exports = {
   devtool: process.env.NODE_ENV === 'development' ? 'eval-source-map' : '',
   entry: {
     'slide-card': path.join(__dirname, './react-demos/slide-card/index.jsx'),
+    'color-palette': path.join(__dirname, './react-demos/color-palette/index.jsx'),
   },
   output: {
     filename: 'react-demos/[name]/build.js',
