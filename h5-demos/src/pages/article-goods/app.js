@@ -13,7 +13,10 @@ export default function() {
         let docData = docFormat.formatImg(doc);
         docData = docFormat.formatGoods(doc);
         //setDocData(docData); // 这是一个问题
-       setFlag(+ new Date());
+        $(window).on('scroll', () => {
+            docFormat.goodsViewLog(docData);
+        });
+        setFlag(+ new Date());
        
     }, [])
     useEffect(() => {

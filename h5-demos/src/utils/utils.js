@@ -67,5 +67,9 @@ export default class utils{
 		} else {
 			return x;
 		}
-	}
+    }
+    
+    static imgOnerror(src) {
+        console.log(src);
+    }
 }

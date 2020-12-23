@@ -1,4 +1,4 @@
-
+// import utils from './../../../utils'
 /**
  * @desc 新增图文带货需求 商品卡片dom结构 2020-12-10
  * 
@@ -6,7 +6,6 @@
  * @param {String} id 匹配到的商品id
  */
 export const goodsRender = function(goodsData ,id) {
-    console.log(goodsData ,id);
     if (goodsData[id]) {
       let {
         goods_sign, 
@@ -34,7 +33,7 @@ export const goodsRender = function(goodsData ,id) {
               <span>${goods_source}</span>  <span>已售${goods_sales}件</span>
             </div>
             <div class='price'>
-              <span>￥${goods_price}</span> <span class='goto-buy-button'> 去购买 <img src='/static/hybrid/img/main/goods_goto_buy_icon.png' /> </span>
+              <span>￥${goods_price}</span> <span class='goto-buy-button'> 去购买 </span>
             </div>
           </div>
         </div>
@@ -64,7 +63,6 @@ export const goodsRender = function(goodsData ,id) {
     let {content, goodsList } = doc
     doc = formGoodsBr(doc);
     let ydTagComponentMatch = content.match(/<\s*(yd-tag-component)[^>]*>(.*?)<\s*\/\s*(yd-tag-component)>/ig)
-    console.log('ydTagComponentMatch', ydTagComponentMatch);
     if (ydTagComponentMatch && ydTagComponentMatch.length > 0) {
         for(let i = 0; i < ydTagComponentMatch.length; i++) {
             const tagItem = ydTagComponentMatch[i];
@@ -75,13 +73,11 @@ export const goodsRender = function(goodsData ,id) {
                 const goodsIdObj = options[0].match(goodsIdReg);
                 if(goodsIdObj && goodsIdObj.length > 0) {
                   const goodsId = goodsIdObj[0].split(":")[1].trim();
-                  console.log('----', ydTagComponentMatch[i])
                   doc.content = doc.content.replace(ydTagComponentMatch[i], goodsRender(goodsList, goodsId))
                 }
             }
         }
     }
-    console.log('d---s--s---s-soc', doc);
     return doc;
   }
  // 懒加载
@@ -90,12 +86,11 @@ export const goodsRender = function(goodsData ,id) {
         screenH = $(window).height();
     $('#root').find('.img-wrap').each(function () {
       var self = $(this);
-      console.log();
       //当图片进入下一屏, 如果不是gif, 并且没有加载, 就开始加载图片
-      if (scrollTop - self.offset().top + screenH * 2 > 0) {
+      if (scrollTop - self.offset().top + screenH * 1.5 > 0) {
         if (!self.attr('data-loaded')) {
             var imgDom = '<img src="' + self[0].dataset.src + '"'
-              + ' onerror="yidian.HB_imgErrorHandle(\'' + self[0].dataset.src + '\')"'
+              + ' onerror="utils.imgOnerror(\'' + self[0].dataset.src + '\')"'
               + '/>';
             self.html(imgDom);
             self.attr('data-loaded', '1');
@@ -104,9 +99,26 @@ export const goodsRender = function(goodsData ,id) {
     })
   }
   
+  // 商品展现打点
+  export function goodsViewLog(doc) {
+    const scrollTop = $(document.body).scrollTop() || $(window).scrollTop(),
+    screenH = $(window).height();
+    $('#root').find('.article-goods-card').each(function () {
+      const self = $(this);
+      if (scrollTop - self.offset().top + screenH > 0) {
+        if (!self.attr('goods-view-log')) {
+          if (self[0]) {
+            const {goodsList} = doc;
+            const currentgoods_id = self[0].dataset.goods_id;
+            console.log(goodsList[currentgoods_id])
+          }
+          self.attr('goods-view-log', '1');
+        }
+      }
+    })
+  }
   export const formatImg = function name(doc) {
     const imgArr = doc.content.match(/\<img.*?src=\".*?\".*?\>/ig) || [];
-    console.log('imgArr', imgArr);
     let imgDomArr = []
     imgArr.forEach(function (item) {
         let imgSrc = ((item.match(/src=(\S*)/) || [])[1] || '').replace(/"/g, '');
