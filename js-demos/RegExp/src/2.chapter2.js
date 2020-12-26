@@ -29,3 +29,18 @@ var reg4 = 'goods res'.replace(/(?=s)/g, '-');
 console.log(reg4);
 var reg5 = '赵磊 李磊 王磊'.replace(/(?=磊)/g, '大'); // 赵大磊 李大磊 王大磊
 console.log(reg5);
+
+// (?!p)就是 (?=p) 的反面意思
+var reg5 = '赵磊 李da磊 王磊'.replace(/(?!磊)/gi, '-')
+console.log(reg5);
+
+
+/************************案例********************************************/
+// 千分位分割
+var reg5 = '123456733229'.replace(/(?!^)(?=(\d{3})+$)/g, ','); // (?!^) 不能是开头 (?=(\d{3})+$) 从
+console.log(reg5);
+
+function format (num) {
+  return num.toFixed(2).replace(/\B(?=(\d{3})+\b)/g, ",").replace(/^/, "$ ");
+  };
+  console.log( format(1888) );
