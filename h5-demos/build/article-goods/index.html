@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>移动端适配</title>
-    <script>
-        !function(win, doc) {
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+<title>图文商品带货业务</title>
+<script>
+!function(win, doc) {
             var root = doc.documentElement,
                 dpi = win.devicePixelRatio || 1;
             !function setFont() {
@@ -17,15 +17,10 @@
                 win.addEventListener('resize',setFont);
             }()
         }(window, document);
-    </script>
-    
-</head>
+</script>
+<link href="../article-goods/article-goods.css" rel="stylesheet"></head>
 <body>
-   <div class="big">这是一个大字体</div>
-   <div class="middle">这是一个中字体</div>
-   <div class="small">这是一个小字体</div>
-   <div class="mini">这是一个非常小的字体</div>
-
-   <p>可以拖拽浏览器大小观察字体大小变化</p>
-</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<div id="root"></div>
+<script type="text/javascript" src="../vendors.js"></script><script type="text/javascript" src="../article-goods/article-goods.js"></script></body>
 </html>

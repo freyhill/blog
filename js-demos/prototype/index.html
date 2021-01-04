@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prototype</title>
+    <style>
+        body{
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain#%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E7%BB%A7%E6%89%BF
+    ">继承与原型链</a>
+    <img src="https://github.com/mqyqingfeng/Blog/raw/master/Images/prototype5.png"/>
+
+    <h2>创建对象的方式</h2>
+    <li>1. 使用语法结构创建对象</li>
+    <pre>
+        <code>
+            var obj = {name: 'leinov'}
+        </code>
+    </pre>
+   
+    <li>2. 使用构造器创建对象</li>
+    <pre>
+        <code>
+            function Person (name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            Person.prototype.getName = function() {
+                return this.name;
+            }
+            var p = new Person('leinov', 18);
+            console.log(p.getName());
+        </code>
+    </pre>
+    <li>3. 使用Object.create创建对象</li>
+    <p>Object.create()方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__</p>
+    <pre>
+        <code>
+            var obj = {name:'leinov'} // obj --> Object.prototype ---> null
+            var obj2 = Object.create(obj); // obj2 -> obj -> Object.prototype ---> null
+            console.log(obj2.__proto__ === obj) // true
+        </code>
+    </pre>
+    <p>    
+        可以使用Object.create(null)创建一个空对象 不包含任何属性方法 不继承Object.prototype
+    </p>    
+    <li>4. 使用class关键字创建对象</li>
+
+    <pre>
+        <code>
+            class Animal {
+                constructor(type) {
+                    this.type = type
+                }
+            }
+            var a1  =  new Animal('cat');
+        </code>
+    </pre>
+    <script src="index.js"></script>
+    <script src="obj.js"></script>
+</body>
+</html>

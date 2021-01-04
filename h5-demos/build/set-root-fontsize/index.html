@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Document</title>
+<title>移动端适配</title>
 <script>
 !function(win, doc) {
             var root = doc.documentElement,
@@ -18,8 +18,12 @@
             }()
         }(window, document);
 </script>
-</head>
+<link href="../set-root-fontsize/set-root-fontsize.css" rel="stylesheet"></head>
 <body>
-<div id="root"></div>
-<script type="text/javascript" src="vendors.js"></script><script type="text/javascript" src="index/index.js"></script></body>
+<div class="big">这是一个大字体</div>
+<div class="middle">这是一个中字体</div>
+<div class="small">这是一个小字体</div>
+<div class="mini">这是一个非常小的字体</div>
+<p>可以拖拽浏览器大小观察字体大小变化</p>
+<script type="text/javascript" src="../vendors.js"></script><script type="text/javascript" src="../set-root-fontsize/set-root-fontsize.js"></script></body>
 </html>
