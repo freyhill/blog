@@ -1,18 +1,28 @@
 <!--
- * @FileName: My file
- * @Author: Leinov
- * @Date: 2019-07-29 21:06:32
- * @LastEditTime: 2019-12-04 19:11:32
- * @Description: description your file
- * @FilePath: \Blog\README.md
- -->
+## 程序人生
+更高效的学习
+成为更优秀的技术leader
+我又开始学吉他了
 
+## JavaScript深入
+关于JavaScript对象的一切
+原型链
+正则表达式
+
+
+## 移动端开发
 
 ## 高效开发
 * [@vue/cli创建typescript项目](https://github.com/leinov/Blog/issues/2)
 * [npm，nvm，nrm常用命令](https://github.com/leinov/Blog/issues/3)
 
-## JavaScript高阶
-* 函数柯里化最佳实践
-* 高阶函数
-* 正则表达式
+-->
+
+
+
+# TO BE OR NOT TO BE
+
+
+
+ 
+
