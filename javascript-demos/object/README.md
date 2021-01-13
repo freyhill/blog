@@ -10,8 +10,18 @@
 
 在 OOP 里，我们可以创建基于其它类的新类，这些新的子类可以继承它们父类的数据和功能。比起复制来说这样能够使用父对象共有的功能
 
+## 原型
+JavaScript 常被描述为一种基于原型的语言 (prototype-based language)——每个对象拥有一个原型对象，对象以其原型为模板、从原型继承方法和属性，这些属性和方法定义在Object的构造器函数(constructor functions)之上的prototype属性上，而非对象实例本身，对象实例和它的构造器之间建立一个链接（它是__proto__属性，是从构造函数的prototype属性派生的），之后通过上溯原型链，在构造器中找到这些属性和方法。
 
+理解对象的原型（可以通过Object.getPrototypeOf(obj)或者已被弃用的__proto__属性获得）与构造函数的prototype属性之间的区别是很重要的。前者是每个实例上都有的属性，后者是构造函数的属性。也就是说，Object.getPrototypeOf(new Foobar())和Foobar.prototype指向着同一个对象。
+```
+function Foobar() {}
 
+var foo = new Foobar();
+
+console.log(Object.getPrototypeOf(foo) === foo.__proto__, foo.__proto__ === Foobar.prototype) // true true
+
+```
 
 # QA
 

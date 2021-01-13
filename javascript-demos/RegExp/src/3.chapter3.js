@@ -1,18 +1,18 @@
 // 正则表达式括号的使用
 const {log: lg} = console;
-/**********分组********* */
+/**********分组************************ */
 {
     var reg1 = 'abcababc'.match(/(abc)+/gi);
     lg(reg1); // [ 'abc', 'abc' ]
 }
 
-/*********分支结构***/
+/********* 分支结构 ************************/
 {
     var reg2 = /^I love (jay|may)$/gi
     lg(reg2.test('I love jay')); // true
 
 }
-/**********分组引用 分组后好提取*/
+/********** 分组引用 分组后好提取 *************/
 {
     var reg3 =/(\d{4})-(\d{2})-(\d{2})/
     var reg4 =/\d{4}-\d{2}-\d{2}/
@@ -30,8 +30,6 @@ const {log: lg} = console;
     ] */
     lg('2020-12-31'.match(reg4)); // [ '2020-12-32', index: 0, input: '2020-12-32', groups: undefined ]
 }
-
-
 
 // 替换
 {
@@ -62,7 +60,6 @@ const {log: lg} = console;
 
 
 /********** 反向引用 ********** */
-
 {
     var reg6 = /\d{4}(-|\/|\.)\d{2}\1\d{2}/
     // 里面的 \1 表示的饮用之前那个分组 (-|\/|\.) 不管他匹配到什么 \1都匹配那个同样的具体字符
@@ -79,5 +76,8 @@ const {log: lg} = console;
 
 {
     // 嵌套括号处理：以左括号为准
-
+    var reg6 = /^((\d)(\d(\d)))\1\2\3\4$/;
+    var string = '1231231233'; // 123 123 1 23 3
+    console.log(string.match(reg6)); // ["1231231233", "123", "1", "23", "3", index: 0, input: "1231231233", groups: undefined]
+    console.log( reg6.test(string) ); 
 }
