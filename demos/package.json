@@ -38,6 +38,7 @@
     "opn": "^5.4.0"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   }
